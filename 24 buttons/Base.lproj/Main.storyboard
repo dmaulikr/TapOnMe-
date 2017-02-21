@@ -290,6 +290,13 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHZ-9W-RnL">
+                                <rect key="frame" x="16" y="42" width="343" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.9468267205661397" green="1" blue="0.19803831192960708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -314,10 +321,12 @@
                         <outlet property="button7" destination="B1f-c6-GsU" id="PTM-p7-qNb"/>
                         <outlet property="button8" destination="UtW-ca-Wrm" id="fCE-Nl-VXl"/>
                         <outlet property="button9" destination="Rie-0x-nwZ" id="7x2-E4-0P2"/>
+                        <outlet property="labelShowTime" destination="BHZ-9W-RnL" id="ex2-P4-LFs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="103.89805097451276"/>
         </scene>
     </scenes>
 </document>

@@ -27,6 +27,7 @@ class SixteenNumbers: UIViewController {
     @IBOutlet weak var button15: UIButton!
     @IBOutlet weak var button16: UIButton!
     
+    @IBOutlet weak var labelShowTime: UILabel!
     
     var setOfNumbers = Set<Int>()
     var arrayOfNumbers = [Int]()
@@ -35,10 +36,10 @@ class SixteenNumbers: UIViewController {
     
     var timer: Timer!
     var timerCount = 0.0
-    
+    var callTimerAtFirstTime = true
     
     override func viewWillAppear(_ animated: Bool) {
-        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(SixteenNumbers.runTimeCode), userInfo: nil, repeats: true)
+        
         makeRandomValue()
     }
 
@@ -50,15 +51,15 @@ class SixteenNumbers: UIViewController {
             }
         } while setOfNumbers.count != 16
     
-        randF()
+        makeNumbersInArrayInRandomPossition()
     }
     
     func runTimeCode() {
         timerCount += 0.01
-        
+        labelShowTime.text = String(format: "%.3f", timerCount)
     }
     
-    func randF() {
+    func makeNumbersInArrayInRandomPossition() {
         for i in setOfNumbers {
             arrayOfNumbers.append(i)
         }
@@ -138,6 +139,10 @@ class SixteenNumbers: UIViewController {
    
     
     @IBAction func pressButtonAction(_ sender: UIButton) {
+        if callTimerAtFirstTime {
+            timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(SixteenNumbers.runTimeCode), userInfo: nil, repeats: true)
+            callTimerAtFirstTime = false
+        }
         if sender.titleLabel?.text == String(pressButtonValue) {
             pressButtonValue += 1
             sender.isEnabled = false
