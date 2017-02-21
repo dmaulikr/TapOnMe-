@@ -321,24 +321,24 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="button1" destination="G8d-hi-zQa" id="y6Y-TE-5GR"/>
-                        <outlet property="button10" destination="TCw-Pd-IAR" id="lYY-a8-WGU"/>
-                        <outlet property="button11" destination="bC0-8s-sjZ" id="8C6-nA-Blj"/>
-                        <outlet property="button12" destination="rBE-Ah-nRv" id="el1-BC-CcI"/>
-                        <outlet property="button13" destination="0Rb-bw-0nq" id="tKt-sP-hks"/>
-                        <outlet property="button14" destination="c4N-ls-F7N" id="1eF-KY-wc3"/>
-                        <outlet property="button15" destination="tjC-lu-ugo" id="rdC-De-C22"/>
-                        <outlet property="button16" destination="N13-MB-NhZ" id="AM9-lI-NiV"/>
-                        <outlet property="button2" destination="dlI-ad-vw1" id="oKM-PO-F2e"/>
-                        <outlet property="button3" destination="lGZ-cw-3K0" id="P3M-sv-YTb"/>
-                        <outlet property="button4" destination="CFA-JV-lp9" id="SVs-Vl-yD7"/>
-                        <outlet property="button5" destination="K51-vo-gpA" id="eQg-rl-SnB"/>
-                        <outlet property="button6" destination="Knj-5L-9db" id="aZz-nU-ADV"/>
-                        <outlet property="button7" destination="B1f-c6-GsU" id="PTM-p7-qNb"/>
-                        <outlet property="button8" destination="UtW-ca-Wrm" id="fCE-Nl-VXl"/>
-                        <outlet property="button9" destination="Rie-0x-nwZ" id="7x2-E4-0P2"/>
                         <outlet property="labelShowTime" destination="BHZ-9W-RnL" id="ex2-P4-LFs"/>
                         <outlet property="lastRecordTime" destination="V4A-17-zhg" id="mG7-26-bBo"/>
+                        <outletCollection property="buttonCollection" destination="G8d-hi-zQa" collectionClass="NSMutableArray" id="Mv2-jg-K8P"/>
+                        <outletCollection property="buttonCollection" destination="dlI-ad-vw1" id="uTl-28-bkI"/>
+                        <outletCollection property="buttonCollection" destination="lGZ-cw-3K0" id="IOR-O6-NIL"/>
+                        <outletCollection property="buttonCollection" destination="CFA-JV-lp9" id="CjN-hf-iqB"/>
+                        <outletCollection property="buttonCollection" destination="K51-vo-gpA" id="BGa-wX-jEF"/>
+                        <outletCollection property="buttonCollection" destination="Knj-5L-9db" id="c8a-OV-uhc"/>
+                        <outletCollection property="buttonCollection" destination="B1f-c6-GsU" id="BP9-g7-9w6"/>
+                        <outletCollection property="buttonCollection" destination="UtW-ca-Wrm" id="pCG-48-JtZ"/>
+                        <outletCollection property="buttonCollection" destination="Rie-0x-nwZ" id="NNY-6F-MPh"/>
+                        <outletCollection property="buttonCollection" destination="TCw-Pd-IAR" id="bio-6e-GRL"/>
+                        <outletCollection property="buttonCollection" destination="bC0-8s-sjZ" id="tIj-Af-qtm"/>
+                        <outletCollection property="buttonCollection" destination="rBE-Ah-nRv" id="2Ok-NX-Mrh"/>
+                        <outletCollection property="buttonCollection" destination="0Rb-bw-0nq" id="NeH-gT-dzJ"/>
+                        <outletCollection property="buttonCollection" destination="c4N-ls-F7N" id="rlu-c8-PLz"/>
+                        <outletCollection property="buttonCollection" destination="tjC-lu-ugo" id="b98-xd-kgV"/>
+                        <outletCollection property="buttonCollection" destination="N13-MB-NhZ" id="Qx1-Ef-WIb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

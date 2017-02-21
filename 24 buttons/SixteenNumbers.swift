@@ -9,26 +9,12 @@
 import UIKit
 
 class SixteenNumbers: UIViewController {
-
-    @IBOutlet weak var button1: UIButton!
-    @IBOutlet weak var button2: UIButton!
-    @IBOutlet weak var button3: UIButton!
-    @IBOutlet weak var button4: UIButton!
-    @IBOutlet weak var button5: UIButton!
-    @IBOutlet weak var button6: UIButton!
-    @IBOutlet weak var button7: UIButton!
-    @IBOutlet weak var button8: UIButton!
-    @IBOutlet weak var button9: UIButton!
-    @IBOutlet weak var button10: UIButton!
-    @IBOutlet weak var button11: UIButton!
-    @IBOutlet weak var button12: UIButton!
-    @IBOutlet weak var button13: UIButton!
-    @IBOutlet weak var button14: UIButton!
-    @IBOutlet weak var button15: UIButton!
-    @IBOutlet weak var button16: UIButton!
     
     @IBOutlet weak var labelShowTime: UILabel!
     @IBOutlet weak var lastRecordTime: UILabel!
+    
+    @IBOutlet var buttonCollection: [UIButton]!
+    
     
     var setOfNumbers = Set<Int>()
     var arrayOfNumbers = [Int]()
@@ -52,6 +38,20 @@ class SixteenNumbers: UIViewController {
             lastRecordTime.isHidden = false
             lastRecordTime.text = "Last Record: \(String(describing: defaults.object(forKey: "time")!)) sec"
         }
+        
+        passNumberInButton(arrayOfButton: buttonCollection)
+    }
+    
+    func runTimeCode() {
+        timerCount += 0.01
+        labelShowTime.text = "Time: \(String(format: "%.3f", timerCount)) sec"
+    }
+    
+    func passNumberInButton(arrayOfButton: [UIButton]) {
+        let array = arrayOfNumbers
+        for i in 0...15 {
+            arrayOfButton[i].setTitle(String(array[i]), for: .normal)
+        }
     }
 
     func makeRandomValue() {
@@ -65,18 +65,11 @@ class SixteenNumbers: UIViewController {
         makeNumbersInArrayInRandomPossition()
     }
     
-    func runTimeCode() {
-        timerCount += 0.01
-        labelShowTime.text = "Time: \(String(format: "%.3f", timerCount)) sec"
-    }
-    
     func makeNumbersInArrayInRandomPossition() {
         for i in setOfNumbers {
             arrayOfNumbers.append(i)
         }
         arrayOfNumbers.shuffle()
-        
-        setRandomValueToButton()
     }
     
     func alertControllerInfo(title: String, message:String) {
@@ -94,60 +87,6 @@ class SixteenNumbers: UIViewController {
         self.present(alertController, animated: true, completion:nil)
     }
     
-    func setRandomValueToButton() {
-        for numberFromSet in arrayOfNumbers {
-            if fillAllButtonsWithNumber == 1 {
-                button1.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 2 {
-                button2.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 3  {
-                button3.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 4 {
-                button4.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 5 {
-                button5.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 6 {
-                button6.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 7 {
-                button7.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 8 {
-                button8.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 9 {
-                button9.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 10 {
-                button10.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 11 {
-                button11.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 12 {
-                button12.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 13 {
-                button13.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 14 {
-                button14.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else if fillAllButtonsWithNumber == 15 {
-                button15.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            } else {
-                button16.setTitle(String(numberFromSet), for: .normal)
-                fillAllButtonsWithNumber += 1
-            }
-        }
-    }
-   
     
     @IBAction func pressButtonAction(_ sender: UIButton) {
         if callTimerAtFirstTime {
