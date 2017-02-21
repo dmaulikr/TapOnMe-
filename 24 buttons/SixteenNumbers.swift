@@ -123,9 +123,16 @@ class SixteenNumbers: UIViewController {
             pressButtonValue += 1
             sender.isEnabled = false
         } else {
-            setOfNumbers.removeAll()
-            dismiss(animated: true, completion: nil)
-            print("Error")
+            let alertController = UIAlertController(title: "Error", message: "You tap wrong number", preferredStyle: .alert)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+                self.setOfNumbers.removeAll()
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+            alertController.addAction(OKAction)
+            self.present(alertController, animated: true, completion:nil)
+            
         }
     }
 
