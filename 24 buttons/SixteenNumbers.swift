@@ -33,13 +33,12 @@ class SixteenNumbers: UIViewController {
     var pressButtonValue = 1
     var fillAllButtonsWithNumber = 1
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        
-    }
+    var timer: Timer!
+    var timerCount = 0.0
+    
     
     override func viewWillAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(SixteenNumbers.runTimeCode), userInfo: nil, repeats: true)
         makeRandomValue()
     }
 
@@ -54,6 +53,11 @@ class SixteenNumbers: UIViewController {
         randF()
     }
     
+    func runTimeCode() {
+        timerCount += 0.01
+        
+    }
+    
     func randF() {
         for i in setOfNumbers {
             arrayOfNumbers.append(i)
@@ -61,6 +65,21 @@ class SixteenNumbers: UIViewController {
         arrayOfNumbers.shuffle()
         
         setRandomValueToButton()
+    }
+    
+    func alertControllerInfo(title: String, message:String) {
+        print("time: \(timerCount)")
+        let alertController = UIAlertController(title: title, message: "Your time: \(String(format: "%.3f", timerCount)) second.\n" +
+            "\(message)", preferredStyle: .alert)
+        
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+            self.setOfNumbers.removeAll()
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        timer.invalidate()
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion:nil)
     }
     
     func setRandomValueToButton() {
@@ -122,17 +141,11 @@ class SixteenNumbers: UIViewController {
         if sender.titleLabel?.text == String(pressButtonValue) {
             pressButtonValue += 1
             sender.isEnabled = false
-        } else {
-            let alertController = UIAlertController(title: "Error", message: "You tap wrong number", preferredStyle: .alert)
-            
-            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-                self.setOfNumbers.removeAll()
-                self.dismiss(animated: true, completion: nil)
+            if pressButtonValue == 17 {
+                alertControllerInfo(title:"Congratulate!", message:"You made this!")
             }
-            
-            alertController.addAction(OKAction)
-            self.present(alertController, animated: true, completion:nil)
-            
+        } else {
+            alertControllerInfo(title:"Error", message:"You tap a wrong number!")
         }
     }
 
