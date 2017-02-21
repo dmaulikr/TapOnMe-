@@ -1,18 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="exi-ci-DU5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Start Screen-->
+        <scene sceneID="YOj-Ya-Wr7">
+            <objects>
+                <viewController id="exi-ci-DU5" customClass="StartScreen" customModule="_4_buttons" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rv7-mp-Hld"/>
+                        <viewControllerLayoutGuide type="bottom" id="0ZE-ui-2by"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nJC-pq-J8v">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQx-vT-PWb">
+                                <rect key="frame" x="112" y="283" width="150" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="sIH-3S-qLS"/>
+                                    <constraint firstAttribute="height" constant="100" id="vlB-AH-tv1"/>
+                                </constraints>
+                                <state key="normal" title="16 numbers"/>
+                                <connections>
+                                    <action selector="moveTo16NumbersScreen:" destination="exi-ci-DU5" eventType="touchUpInside" id="ULy-QZ-ltn"/>
+                                    <segue destination="BYZ-38-t0r" kind="showDetail" id="IWx-W1-WXa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uQx-vT-PWb" firstAttribute="centerX" secondItem="nJC-pq-J8v" secondAttribute="centerX" id="VyI-6f-X11"/>
+                            <constraint firstItem="uQx-vT-PWb" firstAttribute="centerY" secondItem="nJC-pq-J8v" secondAttribute="centerY" id="ysc-2a-xie"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IKI-r5-jpT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-718" y="37"/>
+        </scene>
+        <!--Sixteen Numbers-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="_4_buttons" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SixteenNumbers" id="BYZ-38-t0r" customClass="SixteenNumbers" customModule="_4_buttons" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -254,11 +291,33 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHZ-9W-RnL">
+                                <rect key="frame" x="16" y="40" width="343" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="4cF-W6-FIb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Record:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4A-17-zhg">
+                                <rect key="frame" x="15" y="103" width="345" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.9468267205661397" green="1" blue="0.19803831192960708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="V4A-17-zhg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="7BI-e0-92S"/>
+                            <constraint firstItem="Qud-qM-Ln2" firstAttribute="top" secondItem="V4A-17-zhg" secondAttribute="bottom" constant="8" id="E2C-fa-wfw"/>
                             <constraint firstItem="Qud-qM-Ln2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KKe-Pp-1Li"/>
+                            <constraint firstAttribute="trailing" secondItem="V4A-17-zhg" secondAttribute="trailing" constant="15" id="Khq-pa-u69"/>
+                            <constraint firstItem="BHZ-9W-RnL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="Nse-DC-2fd"/>
                             <constraint firstItem="Qud-qM-Ln2" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Wge-be-9VF"/>
+                            <constraint firstItem="BHZ-9W-RnL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="oAs-Ia-HTJ"/>
+                            <constraint firstItem="BHZ-9W-RnL" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="rfP-tf-GHV"/>
+                            <constraint firstItem="V4A-17-zhg" firstAttribute="top" secondItem="BHZ-9W-RnL" secondAttribute="bottom" constant="8" id="xxt-06-mfv"/>
                         </constraints>
                     </view>
                     <connections>
@@ -278,10 +337,13 @@
                         <outlet property="button7" destination="B1f-c6-GsU" id="PTM-p7-qNb"/>
                         <outlet property="button8" destination="UtW-ca-Wrm" id="fCE-Nl-VXl"/>
                         <outlet property="button9" destination="Rie-0x-nwZ" id="7x2-E4-0P2"/>
+                        <outlet property="labelShowTime" destination="BHZ-9W-RnL" id="ex2-P4-LFs"/>
+                        <outlet property="lastRecordTime" destination="V4A-17-zhg" id="mG7-26-bBo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="103.89805097451276"/>
         </scene>
     </scenes>
 </document>
