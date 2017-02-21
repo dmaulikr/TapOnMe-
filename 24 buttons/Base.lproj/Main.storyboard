@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -290,18 +291,33 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHZ-9W-RnL">
-                                <rect key="frame" x="16" y="42" width="343" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHZ-9W-RnL">
+                                <rect key="frame" x="16" y="40" width="343" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="4cF-W6-FIb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Record:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4A-17-zhg">
+                                <rect key="frame" x="15" y="103" width="345" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.9468267205661397" green="1" blue="0.19803831192960708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="V4A-17-zhg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="7BI-e0-92S"/>
+                            <constraint firstItem="Qud-qM-Ln2" firstAttribute="top" secondItem="V4A-17-zhg" secondAttribute="bottom" constant="8" id="E2C-fa-wfw"/>
                             <constraint firstItem="Qud-qM-Ln2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KKe-Pp-1Li"/>
+                            <constraint firstAttribute="trailing" secondItem="V4A-17-zhg" secondAttribute="trailing" constant="15" id="Khq-pa-u69"/>
+                            <constraint firstItem="BHZ-9W-RnL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="Nse-DC-2fd"/>
                             <constraint firstItem="Qud-qM-Ln2" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Wge-be-9VF"/>
+                            <constraint firstItem="BHZ-9W-RnL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="oAs-Ia-HTJ"/>
+                            <constraint firstItem="BHZ-9W-RnL" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="rfP-tf-GHV"/>
+                            <constraint firstItem="V4A-17-zhg" firstAttribute="top" secondItem="BHZ-9W-RnL" secondAttribute="bottom" constant="8" id="xxt-06-mfv"/>
                         </constraints>
                     </view>
                     <connections>
@@ -322,6 +338,7 @@
                         <outlet property="button8" destination="UtW-ca-Wrm" id="fCE-Nl-VXl"/>
                         <outlet property="button9" destination="Rie-0x-nwZ" id="7x2-E4-0P2"/>
                         <outlet property="labelShowTime" destination="BHZ-9W-RnL" id="ex2-P4-LFs"/>
+                        <outlet property="lastRecordTime" destination="V4A-17-zhg" id="mG7-26-bBo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

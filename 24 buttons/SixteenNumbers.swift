@@ -28,6 +28,7 @@ class SixteenNumbers: UIViewController {
     @IBOutlet weak var button16: UIButton!
     
     @IBOutlet weak var labelShowTime: UILabel!
+    @IBOutlet weak var lastRecordTime: UILabel!
     
     var setOfNumbers = Set<Int>()
     var arrayOfNumbers = [Int]()
@@ -37,10 +38,20 @@ class SixteenNumbers: UIViewController {
     var timer: Timer!
     var timerCount = 0.0
     var callTimerAtFirstTime = true
+    let defaults = UserDefaults.standard
+
     
     override func viewWillAppear(_ animated: Bool) {
         
         makeRandomValue()
+        labelShowTime.isHidden = true
+        
+        if defaults.object(forKey: "time") == nil {
+            lastRecordTime.isHidden = true
+        } else {
+            lastRecordTime.isHidden = false
+            lastRecordTime.text = "Last Record: \(String(describing: defaults.object(forKey: "time")!)) sec"
+        }
     }
 
     func makeRandomValue() {
@@ -56,7 +67,7 @@ class SixteenNumbers: UIViewController {
     
     func runTimeCode() {
         timerCount += 0.01
-        labelShowTime.text = String(format: "%.3f", timerCount)
+        labelShowTime.text = "Time: \(String(format: "%.3f", timerCount)) sec"
     }
     
     func makeNumbersInArrayInRandomPossition() {
@@ -140,6 +151,7 @@ class SixteenNumbers: UIViewController {
     
     @IBAction func pressButtonAction(_ sender: UIButton) {
         if callTimerAtFirstTime {
+            labelShowTime.isHidden = false
             timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(SixteenNumbers.runTimeCode), userInfo: nil, repeats: true)
             callTimerAtFirstTime = false
         }
@@ -147,6 +159,7 @@ class SixteenNumbers: UIViewController {
             pressButtonValue += 1
             sender.isEnabled = false
             if pressButtonValue == 17 {
+                defaults.set(String(format: "%.3f", timerCount), forKey: "time")
                 alertControllerInfo(title:"Congratulate!", message:"You made this!")
             }
         } else {
