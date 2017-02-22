@@ -10,26 +10,24 @@ import UIKit
 
 class SixteenNumbers: UIViewController {
     
+    //MARK: - Outlets + Properties
     @IBOutlet weak var labelShowTime: UILabel!
     @IBOutlet weak var lastRecordTime: UILabel!
-    
     @IBOutlet var buttonCollection: [UIButton]!
-    
     
     var setOfNumbers = Set<Int>()
     var arrayOfNumbers = [Int]()
     var pressButtonValue = 1
-    var fillAllButtonsWithNumber = 1
     
     var timer: Timer!
     var timerCount = 0.0
     var callTimerAtFirstTime = true
     let defaults = UserDefaults.standard
-
+    var setLastRecordTime = 0.0
     
+    //MARK: - Default func
     override func viewWillAppear(_ animated: Bool) {
-        
-        makeRandomValue()
+        fillSetWithValues()
         labelShowTime.isHidden = true
         
         if defaults.object(forKey: "time") == nil {
@@ -37,43 +35,28 @@ class SixteenNumbers: UIViewController {
         } else {
             lastRecordTime.isHidden = false
             lastRecordTime.text = "Last Record: \(String(describing: defaults.object(forKey: "time")!)) sec"
+            
+            var checkLastTime = lastRecordTime.text!
+            var index = checkLastTime.index(checkLastTime.startIndex, offsetBy: 13)
+            checkLastTime = checkLastTime.substring(from: index)
+            index = checkLastTime.index(checkLastTime.startIndex, offsetBy: 5)
+            checkLastTime = checkLastTime.substring(to: index)
+            
+            if let checkLastTimeExist = Double(checkLastTime) {
+                setLastRecordTime = checkLastTimeExist
+            }
         }
         
-        passNumberInButton(arrayOfButton: buttonCollection)
+        passNumberInButtons(arrayOfButton: buttonCollection)
     }
     
+    //MARK: - Funcs
     func runTimeCode() {
         timerCount += 0.01
         labelShowTime.text = "Time: \(String(format: "%.3f", timerCount)) sec"
     }
     
-    func passNumberInButton(arrayOfButton: [UIButton]) {
-        let array = arrayOfNumbers
-        for i in 0...15 {
-            arrayOfButton[i].setTitle(String(array[i]), for: .normal)
-        }
-    }
-
-    func makeRandomValue() {
-        repeat{
-            let random = arc4random_uniform(17)
-            if Int(random) != 0 {
-                setOfNumbers.insert(Int(random))
-            }
-        } while setOfNumbers.count != 16
-    
-        makeNumbersInArrayInRandomPossition()
-    }
-    
-    func makeNumbersInArrayInRandomPossition() {
-        for i in setOfNumbers {
-            arrayOfNumbers.append(i)
-        }
-        arrayOfNumbers.shuffle()
-    }
-    
     func alertControllerInfo(title: String, message:String) {
-        print("time: \(timerCount)")
         let alertController = UIAlertController(title: title, message: "Your time: \(String(format: "%.3f", timerCount)) second.\n" +
             "\(message)", preferredStyle: .alert)
         
@@ -87,7 +70,7 @@ class SixteenNumbers: UIViewController {
         self.present(alertController, animated: true, completion:nil)
     }
     
-    
+    //MARK: - Actions
     @IBAction func pressButtonAction(_ sender: UIButton) {
         if callTimerAtFirstTime {
             labelShowTime.isHidden = false
@@ -98,24 +81,18 @@ class SixteenNumbers: UIViewController {
             pressButtonValue += 1
             sender.isEnabled = false
             if pressButtonValue == 17 {
-                defaults.set(String(format: "%.3f", timerCount), forKey: "time")
                 alertControllerInfo(title:"Congratulate!", message:"You made this!")
+                
+                if defaults.object(forKey: "time") != nil {
+                    if Double(String(format: "%.3f", timerCount))! < setLastRecordTime {
+                        defaults.set(String(format: "%.3f", timerCount), forKey: "time")
+                    }
+                } else {
+                    defaults.set(String(format: "%.3f", timerCount), forKey: "time")
+                }
             }
         } else {
             alertControllerInfo(title:"Error", message:"You tap a wrong number!")
-        }
-    }
-
-}
-
-extension Array
-{
-    /** Randomizes the order of an array's elements. */
-    mutating func shuffle()
-    {
-        for _ in 0..<10
-        {
-            sort { (_,_) in arc4random() < arc4random() }
         }
     }
 }
