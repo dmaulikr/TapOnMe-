@@ -13,11 +13,11 @@ extension SixteenNumbers {
     /* Fill buttons with random number */
     func fillSetWithValues() {
         repeat{
-            let random = arc4random_uniform(17)
+            let random = arc4random_uniform(26)
             if Int(random) != 0 {
                 setOfNumbers.insert(Int(random))
             }
-        } while setOfNumbers.count != 16
+        } while setOfNumbers.count != 25
         
         makeNumbersInArrayInRandomPossition()
     }
@@ -31,7 +31,7 @@ extension SixteenNumbers {
     
     func passNumberInButtons(arrayOfButton: [UIButton]) {
         let array = arrayOfNumbers
-        for i in 0...15 {
+        for i in 0...24 {
             arrayOfButton[i].setTitle(String(array[i]), for: .normal)
         }
     }
