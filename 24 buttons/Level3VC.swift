@@ -1,5 +1,5 @@
 //
-//  Level2VC.swift
+//  Level3VC.swift
 //  24 buttons
 //
 //  Created by Dmytro Ryshchuk on 01.03.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Level2VC: UIViewController, MainProtocol, SecondLevelProtocol {
+class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
     
     var mainLevelLogic = Level1VC()
     
@@ -110,6 +110,9 @@ class Level2VC: UIViewController, MainProtocol, SecondLevelProtocol {
         if sender.titleLabel?.text == String(pressButtonValue + 1) {
             pressButtonValue += 1
             sender.isEnabled = false
+            
+            mainLevelLogic.passNumberInButtons(arrayOfButton: buttonCollection)
+        
             if pressButtonValue == 25 {
                 alertControllerInfoProtocol(titleP:"Congratulate!", messageP:"You made this!")
                 
@@ -125,6 +128,34 @@ class Level2VC: UIViewController, MainProtocol, SecondLevelProtocol {
         } else {
             alertControllerInfoProtocol(titleP:"Wrong!", messageP:"You tap a wrong number!")
             restartButtonAction(Any.self)
+        }
+    }
+    
+    
+    func fillSetWithValues() {
+        repeat{
+            let random = arc4random_uniform(26)
+            if Int(random) != 0 {
+                setOfNumbers.insert(Int(random))
+            }
+        } while setOfNumbers.count != 25
+        
+        makeNumbersInArrayInRandomPossition()
+    }
+    
+    func makeNumbersInArrayInRandomPossition() {
+        arrayOfNumbers.removeAll()
+        for i in setOfNumbers {
+            arrayOfNumbers.append(i)
+        }
+        
+        arrayOfNumbers.shuffle()
+    }
+    
+    func passNumberInButtons(arrayOfButton: [UIButton]) {
+        let array = arrayOfNumbers
+        for i in 0...24 {
+            arrayOfButton[i].setTitle(String(array[i]), for: .normal)
         }
     }
 }

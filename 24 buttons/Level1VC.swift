@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Level1VC: UIViewController, MainProtocol, SecondLevelProtocol {
+class Level1VC: UIViewController, MainProtocol {
     
     //MARK: - Outlets + Properties
     @IBOutlet weak var labelShowTime: UILabel!
@@ -81,7 +81,6 @@ class Level1VC: UIViewController, MainProtocol, SecondLevelProtocol {
         timerCount = timeForCurrentLevel
         labelShowTime.text = ""
         
-        makeButtonEnableAgain()
         fillSetWithValues()
         passNumberInButtons(arrayOfButton: buttonCollection)
         
