@@ -8,8 +8,43 @@
 
 import UIKit
 
+//MARK: - Protocols
+protocol MainProtocol: class {
+    var labelShowTimeProtocol: UILabel! {
+        get set
+    }
+    var timerCount: Double {
+        get set
+    }
+    var setOfNumbers: Set<Int> {
+        get set
+    }
+    var timeForCurrentLevel: Double {
+        get set
+    }
+    var pressButtonValue: Int {
+        get set
+    }
+    var buttonCollectionProtocol: [UIButton] {
+        get set
+    }
+    
+    func alertControllerInfo(title: String, message:String, timeForCurrentLevel: Double, fromController controller: UIViewController)
+}
+
+protocol SecondLevelProtocol: class {
+    var alphaValue: Double {
+        get set
+    }
+    var buttonCollectionProtocol: [UIButton] {
+        get set
+    }
+    
+    func runTimeCode()
+}
+
 //MARK: - Extensions
-extension SixteenNumbers {
+extension Level1VC {
     /* Fill buttons with random number */
     func fillSetWithValues() {
         repeat{
@@ -23,9 +58,11 @@ extension SixteenNumbers {
     }
     
     func makeNumbersInArrayInRandomPossition() {
+        arrayOfNumbers.removeAll()
         for i in setOfNumbers {
             arrayOfNumbers.append(i)
         }
+        
         arrayOfNumbers.shuffle()
     }
     
@@ -46,3 +83,52 @@ extension Array {
         }
     }
 }
+
+extension MainProtocol {
+    func runTimeCode() {
+        timerCount -= 0.01
+        labelShowTimeProtocol.text = "Time: \(String(format: "%.3f", timerCount)) sec"
+        
+        if timerCount < 0.0 {
+            alertControllerInfo(title:"Time out!", message:"I belive in you! Try one more time.", timeForCurrentLevel: timeForCurrentLevel, fromController: self as! UIViewController)
+        }
+    }
+    
+    func alertControllerInfo(title: String, message:String, timeForCurrentLevel: Double, fromController controller: UIViewController) {
+        print("\(title) \(message) - protocol")
+        var alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        if title == "Time out!" || title == "Wrong!" {
+            alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        } else {
+            alertController = UIAlertController(title: title, message: "Your time: \(timeForCurrentLevel - (Double(String(format: "%.3f", timerCount)))!) second.\n" +
+                "\(message)", preferredStyle: .alert)
+        }
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+            self.setOfNumbers.removeAll()
+        }
+        
+        alertController.addAction(OKAction)
+        controller.present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension SecondLevelProtocol {
+    func level2_TheMoreTimeGoneTheLessAlphaIs(alpha: Double) {
+        alphaValue = alpha
+        alphaValue -= 0.007
+        for i in 0...24 {
+            buttonCollectionProtocol[i].alpha = CGFloat(alphaValue)
+        }
+        if alphaValue < 0.25 {
+            alphaValue = 0.25
+        }
+    }
+    
+    func makeButtonEnableAgain() {
+        for i in 0...24 {
+            buttonCollectionProtocol[i].isEnabled = true
+        }
+    }
+}
+
