@@ -22,41 +22,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQx-vT-PWb">
-                                <rect key="frame" x="112" y="283" width="150" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="sIH-3S-qLS"/>
-                                    <constraint firstAttribute="height" constant="100" id="vlB-AH-tv1"/>
-                                </constraints>
-                                <state key="normal" title="1 level"/>
-                                <connections>
-                                    <action selector="moveTo16NumbersScreen:" destination="exi-ci-DU5" eventType="touchUpInside" id="ULy-QZ-ltn"/>
-                                    <segue destination="BYZ-38-t0r" kind="showDetail" id="IWx-W1-WXa"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lHn-bx-sD7">
-                                <rect key="frame" x="112" y="391" width="150" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="2 level"/>
-                                <connections>
-                                    <action selector="moveTo16NumbersScreen:" destination="exi-ci-DU5" eventType="touchUpInside" id="Jhr-Da-Xbe"/>
-                                    <segue destination="ZwO-Zi-dY9" kind="showDetail" id="xpB-8G-QkC"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFa-be-YTH">
-                                <rect key="frame" x="112" y="499" width="150" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="3 level"/>
-                                <connections>
-                                    <action selector="moveTo16NumbersScreen:" destination="exi-ci-DU5" eventType="touchUpInside" id="RmN-Dx-xkA"/>
-                                    <segue destination="yZV-xt-dZb" kind="showDetail" id="CA7-Tn-ZoL"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vcV-Yv-8Z8">
+                                <rect key="frame" x="112" y="175.5" width="150" height="316"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQx-vT-PWb">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="100"/>
+                                        <color key="backgroundColor" red="0.94503694772720337" green="0.99990803003311157" blue="0.19657573103904724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="sIH-3S-qLS"/>
+                                            <constraint firstAttribute="height" constant="100" id="vlB-AH-tv1"/>
+                                        </constraints>
+                                        <state key="normal" title="1 level"/>
+                                        <connections>
+                                            <action selector="moveTo16NumbersScreen:" destination="exi-ci-DU5" eventType="touchUpInside" id="ULy-QZ-ltn"/>
+                                            <segue destination="BYZ-38-t0r" kind="showDetail" id="IWx-W1-WXa"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lHn-bx-sD7">
+                                        <rect key="frame" x="0.0" y="108" width="150" height="100"/>
+                                        <color key="backgroundColor" red="0.26966205239295959" green="1" blue="0.069584541022777557" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="2 level"/>
+                                        <connections>
+                                            <action selector="moveTo16NumbersScreen:" destination="exi-ci-DU5" eventType="touchUpInside" id="Jhr-Da-Xbe"/>
+                                            <segue destination="ZwO-Zi-dY9" kind="showDetail" id="xpB-8G-QkC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFa-be-YTH">
+                                        <rect key="frame" x="0.0" y="216" width="150" height="100"/>
+                                        <color key="backgroundColor" red="0.20501589775085449" green="0.99779361486434937" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="3 level"/>
+                                        <connections>
+                                            <action selector="moveTo16NumbersScreen:" destination="exi-ci-DU5" eventType="touchUpInside" id="RmN-Dx-xkA"/>
+                                            <segue destination="yZV-xt-dZb" kind="showDetail" id="CA7-Tn-ZoL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.42567147265469762" blue="0.98383172407421804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="uQx-vT-PWb" firstAttribute="centerX" secondItem="nJC-pq-J8v" secondAttribute="centerX" id="VyI-6f-X11"/>
-                            <constraint firstItem="uQx-vT-PWb" firstAttribute="centerY" secondItem="nJC-pq-J8v" secondAttribute="centerY" id="ysc-2a-xie"/>
+                            <constraint firstItem="vcV-Yv-8Z8" firstAttribute="centerX" secondItem="nJC-pq-J8v" secondAttribute="centerX" id="d2N-fw-9g0"/>
+                            <constraint firstItem="vcV-Yv-8Z8" firstAttribute="centerY" secondItem="nJC-pq-J8v" secondAttribute="centerY" id="kDJ-ld-h23"/>
                         </constraints>
                     </view>
                 </viewController>
