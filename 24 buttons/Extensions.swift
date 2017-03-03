@@ -111,6 +111,12 @@ extension MainProtocol {
         alertController.addAction(OKAction)
         controller.present(alertController, animated: true, completion: nil)
     }
+    
+    func makeButtonEnableAgain() {
+        for i in 0...24 {
+            buttonCollectionProtocol[i].isEnabled = true
+        }
+    }
 }
 
 extension SecondLevelProtocol {
@@ -122,12 +128,6 @@ extension SecondLevelProtocol {
         }
         if alphaValue < 0.25 {
             alphaValue = 0.25
-        }
-    }
-    
-    func makeButtonEnableAgain() {
-        for i in 0...24 {
-            buttonCollectionProtocol[i].isEnabled = true
         }
     }
 }

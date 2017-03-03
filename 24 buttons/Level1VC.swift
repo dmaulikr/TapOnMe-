@@ -81,6 +81,7 @@ class Level1VC: UIViewController, MainProtocol {
         timerCount = timeForCurrentLevel
         labelShowTime.text = ""
         
+        makeButtonEnableAgain()
         fillSetWithValues()
         passNumberInButtons(arrayOfButton: buttonCollection)
         
