@@ -10,7 +10,7 @@ import UIKit
 
 class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
     
-    var mainLevelLogic = Level1VC()
+//    var mainLevelLogic = Level1VC()
     
     //MARK: - Outlets + Properties
     @IBOutlet weak var labelShowTime: UILabel!
@@ -20,16 +20,18 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
     var setOfNumbers = Set<Int>()
     var arrayOfNumbers = [Int]()
     var pressButtonValue = 0
+//    var numberOfButtonsWerePressed = 0
+//    var arrayOfTags = [Int]()
     
     var timer: Timer!
     var timerForLevel2: Timer!
-    var timerCount = 15.0
-    var timeForCurrentLevel = 15.0
+    var timerCount = 50.0
+    var timeForCurrentLevel = 50.0
     var callTimerAtFirstTime = true
     let defaults = UserDefaults.standard
     var setLastRecordTime = 0.0
     
-    var alphaValue = 1.0
+    var alphaValue = 4.0
     
     //MARK: - Internal
     internal var labelShowTimeProtocol: UILabel!
@@ -38,7 +40,7 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
     
     //MARK: - Default func
     override func viewWillAppear(_ animated: Bool) {
-        mainLevelLogic.fillSetWithValues()
+        fillSetWithValues()
         labelShowTime.isHidden = true
         
         if defaults.object(forKey: "time") == nil {
@@ -59,7 +61,7 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
         }
         buttonCollectionProtocol = buttonCollection
         labelShowTimeProtocol = labelShowTime
-        mainLevelLogic.passNumberInButtons(arrayOfButton: buttonCollection)
+        passNumberInButtons(arrayOfButton: buttonCollection)
     }
     
     //MARK: - Funcs
@@ -92,8 +94,8 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
         labelShowTime.text = ""
         
         makeButtonEnableAgain()
-        mainLevelLogic.fillSetWithValues()
-        mainLevelLogic.passNumberInButtons(arrayOfButton: buttonCollection)
+        fillSetWithValues()
+        passNumberInButtons(arrayOfButton: buttonCollection)
         
         callTimerAtFirstTime = true
     }
@@ -108,11 +110,25 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
             callTimerAtFirstTime = false
         }
         if sender.titleLabel?.text == String(pressButtonValue + 1) {
-            pressButtonValue += 1
-            sender.isEnabled = false
+//            numberOfButtonsWerePressed = pressButtonValue
+//            print(numberOfButtonsWerePressed)
+//            arrayOfNumbers.sort()
+//            arrayOfNumbers.remove(at: 0)
+//            print("array2 - \(arrayOfNumbers)")
+//            arrayOfTags.append(sender.tag)
             
-            mainLevelLogic.passNumberInButtons(arrayOfButton: buttonCollection)
-        
+
+            arrayOfNumbers.shuffle()
+            print("array3 - \(arrayOfNumbers)")
+            print()
+            let array = arrayOfNumbers
+            for i in 0...array.count - 1 {
+                buttonCollection[i].setTitle(String(array[i]), for: .normal)
+            }
+            
+            pressButtonValue += 1
+            //sender.isEnabled = false
+            
             if pressButtonValue == 25 {
                 alertControllerInfoProtocol(titleP:"Congratulate!", messageP:"You made this!")
                 
@@ -148,13 +164,13 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
         for i in setOfNumbers {
             arrayOfNumbers.append(i)
         }
-        
-        arrayOfNumbers.shuffle()
     }
     
     func passNumberInButtons(arrayOfButton: [UIButton]) {
+        arrayOfNumbers.shuffle()
+        
         let array = arrayOfNumbers
-        for i in 0...24 {
+        for i in 0...array.count - 1 {
             arrayOfButton[i].setTitle(String(array[i]), for: .normal)
         }
     }
