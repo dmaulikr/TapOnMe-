@@ -10,7 +10,7 @@ import UIKit
 
 class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
     
-//    var mainLevelLogic = Level1VC()
+    var mainLevelLogic = Level1VC()
     
     //MARK: - Outlets + Properties
     @IBOutlet weak var labelShowTime: UILabel!
@@ -41,7 +41,7 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
     
     //MARK: - Default func
     override func viewWillAppear(_ animated: Bool) {
-        fillSetWithValues()
+        mainLevelLogic.fillSetWithValues()
         labelShowTime.isHidden = true
         
         if defaults.object(forKey: "time") == nil {
@@ -62,7 +62,7 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
         }
         buttonCollectionProtocol = buttonCollection
         labelShowTimeProtocol = labelShowTime
-        passNumberInButtons(arrayOfButton: buttonCollection)
+        mainLevelLogic.passNumberInButtons(arrayOfButton: buttonCollection)
         whichNumberTapNextOutlet.text = "[\(pressButtonValue + 1)] \(pressButtonValue + 2) \(pressButtonValue + 3)"
     }
     
@@ -85,19 +85,26 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
         level2_TheMoreTimeGoneTheLessAlphaIs(alpha: alphaValue)
     }
     
+    @IBAction func backButtonAction(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func restartButtonAction(_ sender: Any) {
-        timer.invalidate()
-        timerForLevel2.invalidate()
-        
+        if timer != nil {
+            timer.invalidate()
+        }
+        if timerForLevel2 != nil {
+            timerForLevel2.invalidate()
+        }
+
         pressButtonValue = 0
         timerCount = timeForCurrentLevel
-        level2_TheMoreTimeGoneTheLessAlphaIs(alpha: 1.0)    //TODO: check if it implemented
+        level2_TheMoreTimeGoneTheLessAlphaIs(alpha: 4.0)    
         labelShowTime.text = ""
         
         makeButtonEnableAgain()
-        fillSetWithValues()
-        passNumberInButtons(arrayOfButton: buttonCollection)
+        mainLevelLogic.fillSetWithValues()
+        mainLevelLogic.passNumberInButtons(arrayOfButton: buttonCollection)
         
         callTimerAtFirstTime = true
         whichNumberTapNextOutlet.text = "[\(pressButtonValue + 1)] \(pressButtonValue + 2) \(pressButtonValue + 3)"
@@ -119,6 +126,7 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
 //            arrayOfNumbers.remove(at: 0)
 //            print("array2 - \(arrayOfNumbers)")
 //            arrayOfTags.append(sender.tag)
+            print(alphaValue)
             switch pressButtonValue + 2{
             case 2:
                 whichNumberTapNextOutlet.text = "\(pressButtonValue + 1) [\(pressButtonValue + 2)] \(pressButtonValue + 3) \(pressButtonValue + 4)"
@@ -136,9 +144,9 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
                 break
             }
             
-            arrayOfNumbers.shuffle()
-
-            let array = arrayOfNumbers
+            mainLevelLogic.arrayOfNumbers.shuffle()
+            
+            let array = mainLevelLogic.arrayOfNumbers
             for i in 0...array.count - 1 {
                 buttonCollection[i].setTitle(String(array[i]), for: .normal)
             }
@@ -161,34 +169,6 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
         } else {
             alertControllerInfoProtocol(titleP:"Wrong!", messageP:"You tap a wrong number!")
             restartButtonAction(Any.self)
-        }
-    }
-    
-    
-    func fillSetWithValues() {
-        repeat{
-            let random = arc4random_uniform(26)
-            if Int(random) != 0 {
-                setOfNumbers.insert(Int(random))
-            }
-        } while setOfNumbers.count != 25
-        
-        makeNumbersInArrayInRandomPossition()
-    }
-    
-    func makeNumbersInArrayInRandomPossition() {
-        arrayOfNumbers.removeAll()
-        for i in setOfNumbers {
-            arrayOfNumbers.append(i)
-        }
-    }
-    
-    func passNumberInButtons(arrayOfButton: [UIButton]) {
-        arrayOfNumbers.shuffle()
-        
-        let array = arrayOfNumbers
-        for i in 0...array.count - 1 {
-            arrayOfButton[i].setTitle(String(array[i]), for: .normal)
         }
     }
 }

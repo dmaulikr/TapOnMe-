@@ -73,10 +73,14 @@ class Level1VC: UIViewController, MainProtocol {
             restartButtonAction(Any.self)
         }
     }
+    @IBAction func backButtonAction(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func restartButtonAction(_ sender: Any) {
-        timer.invalidate()
-        
+        if timer != nil {
+            timer.invalidate()
+        }
         pressButtonValue = 0
         timerCount = timeForCurrentLevel
         labelShowTime.text = ""
