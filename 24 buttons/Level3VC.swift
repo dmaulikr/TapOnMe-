@@ -15,6 +15,7 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
     //MARK: - Outlets + Properties
     @IBOutlet weak var labelShowTime: UILabel!
     @IBOutlet weak var lastRecordTime: UILabel!
+    @IBOutlet weak var whichNumberTapNextOutlet: UILabel!
     @IBOutlet var buttonCollection: [UIButton]!
     
     var setOfNumbers = Set<Int>()
@@ -62,6 +63,7 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
         buttonCollectionProtocol = buttonCollection
         labelShowTimeProtocol = labelShowTime
         passNumberInButtons(arrayOfButton: buttonCollection)
+        whichNumberTapNextOutlet.text = "[\(pressButtonValue + 1)] \(pressButtonValue + 2) \(pressButtonValue + 3)"
     }
     
     //MARK: - Funcs
@@ -98,6 +100,7 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
         passNumberInButtons(arrayOfButton: buttonCollection)
         
         callTimerAtFirstTime = true
+        whichNumberTapNextOutlet.text = "[\(pressButtonValue + 1)] \(pressButtonValue + 2) \(pressButtonValue + 3)"
     }
     
     //MARK: - Actions
@@ -116,11 +119,25 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
 //            arrayOfNumbers.remove(at: 0)
 //            print("array2 - \(arrayOfNumbers)")
 //            arrayOfTags.append(sender.tag)
+            switch pressButtonValue + 2{
+            case 2:
+                whichNumberTapNextOutlet.text = "\(pressButtonValue + 1) [\(pressButtonValue + 2)] \(pressButtonValue + 3) \(pressButtonValue + 4)"
+            case 3:
+                whichNumberTapNextOutlet.text = "\(pressButtonValue) \(pressButtonValue + 1) [\(pressButtonValue + 2)] \(pressButtonValue + 3) \(pressButtonValue + 4)"
+            case 4...22:
+                whichNumberTapNextOutlet.text = "... \(pressButtonValue) \(pressButtonValue + 1) [\(pressButtonValue + 2)] \(pressButtonValue + 3) \(pressButtonValue + 4) ..."
+            case 23:
+                whichNumberTapNextOutlet.text = "... \(pressButtonValue) \(pressButtonValue + 1) [\(pressButtonValue + 2)] \(pressButtonValue + 3) \(pressButtonValue + 4)"
+            case 24:
+                whichNumberTapNextOutlet.text = "... \(pressButtonValue) \(pressButtonValue + 1) [\(pressButtonValue + 2)] \(pressButtonValue + 3)"
+            case 25:
+                whichNumberTapNextOutlet.text = "... \(pressButtonValue) \(pressButtonValue + 1) [\(pressButtonValue + 2)]"
+            default:
+                break
+            }
             
-
             arrayOfNumbers.shuffle()
-            print("array3 - \(arrayOfNumbers)")
-            print()
+
             let array = arrayOfNumbers
             for i in 0...array.count - 1 {
                 buttonCollection[i].setTitle(String(array[i]), for: .normal)
