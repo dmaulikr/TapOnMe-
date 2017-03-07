@@ -30,6 +30,8 @@ protocol MainProtocol: class {
     }
     
     func alertControllerInfo(title: String, message:String, timeForCurrentLevel: Double, fromController controller: UIViewController)
+    func makeButtonEnableAgain()
+    func runTimeCode()
 }
 
 protocol SecondLevelProtocol: class {
@@ -40,50 +42,11 @@ protocol SecondLevelProtocol: class {
         get set
     }
     
-    func runTimeCode()
+    //func runTimeCode()
+    func level2_TheMoreTimeGoneTheLessAlphaIs(alpha: Double)
 }
 
 //MARK: - Extensions
-extension Level1VC {
-    /* Fill buttons with random number */
-    func fillSetWithValues() {
-        repeat{
-            let random = arc4random_uniform(26)
-            if Int(random) != 0 {
-                setOfNumbers.insert(Int(random))
-            }
-        } while setOfNumbers.count != 25
-        
-        makeNumbersInArrayInRandomPossition()
-    }
-    
-    func makeNumbersInArrayInRandomPossition() {
-        arrayOfNumbers.removeAll()
-        for i in setOfNumbers {
-            arrayOfNumbers.append(i)
-        }
-        
-        arrayOfNumbers.shuffle()
-    }
-    
-    func passNumberInButtons(arrayOfButton: [UIButton]) {
-        let array = arrayOfNumbers
-        for i in 0...24 {
-            arrayOfButton[i].setTitle(String(array[i]), for: .normal)
-        }
-    }
-}
-
-extension Array {
-    /* Randomizes the order of an array's elements. */
-    mutating func shuffle() {
-        for _ in 0..<10 {
-            sort { (_,_) in arc4random() < arc4random()
-            }
-        }
-    }
-}
-
 extension MainProtocol {
     func runTimeCode() {
         timerCount -= 0.01
@@ -128,6 +91,48 @@ extension SecondLevelProtocol {
         }
         if alphaValue < 0.25 {
             alphaValue = 0.25
+        }
+    }
+}
+
+
+//Extension classes
+extension Level1VC {
+    /* Fill buttons with random number */
+    func fillSetWithValues() {
+        repeat{
+            let random = arc4random_uniform(26)
+            if Int(random) != 0 {
+                setOfNumbers.insert(Int(random))
+            }
+        } while setOfNumbers.count != 25
+        
+        makeNumbersInArrayInRandomPossition()
+    }
+    
+    func makeNumbersInArrayInRandomPossition() {
+        arrayOfNumbers.removeAll()
+        for i in setOfNumbers {
+            arrayOfNumbers.append(i)
+        }
+        
+        arrayOfNumbers.shuffle()
+    }
+    
+    func passNumberInButtons(arrayOfButton: [UIButton]) {
+        let array = arrayOfNumbers
+        for i in 0...24 {
+            arrayOfButton[i].setTitle(String(array[i]), for: .normal)
+        }
+    }
+}
+
+extension Array {
+    /* Randomizes the order of an array's elements. */
+    mutating func shuffle() {
+        for _ in 0..<10 {
+            sort { (_,_) in arc4random() < arc4random()
+            }
         }
     }
 }
