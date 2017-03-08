@@ -81,14 +81,21 @@ class Level2VC: UIViewController, MainProtocol, SecondLevelProtocol {
         level2_TheMoreTimeGoneTheLessAlphaIs(alpha: alphaValue)
     }
     
+    @IBAction func backButtonAction(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func restartButtonAction(_ sender: Any) {
-        timer.invalidate()
-        timerForLevel2.invalidate()
-        
+        if timer != nil {
+            timer.invalidate()
+        }
+        if timerForLevel2 != nil {
+            timerForLevel2.invalidate()
+        }
+
         pressButtonValue = 0
         timerCount = timeForCurrentLevel
-        level2_TheMoreTimeGoneTheLessAlphaIs(alpha: 1.0)    //TODO: check if it implemented
+        level2_TheMoreTimeGoneTheLessAlphaIs(alpha: 1.0)    
         labelShowTime.text = ""
         
         makeButtonEnableAgain()

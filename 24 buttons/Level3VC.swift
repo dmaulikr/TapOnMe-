@@ -15,21 +15,24 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
     //MARK: - Outlets + Properties
     @IBOutlet weak var labelShowTime: UILabel!
     @IBOutlet weak var lastRecordTime: UILabel!
+    @IBOutlet weak var whichNumberTapNextOutlet: UILabel!
     @IBOutlet var buttonCollection: [UIButton]!
     
     var setOfNumbers = Set<Int>()
     var arrayOfNumbers = [Int]()
     var pressButtonValue = 0
+//    var numberOfButtonsWerePressed = 0
+//    var arrayOfTags = [Int]()
     
     var timer: Timer!
     var timerForLevel2: Timer!
-    var timerCount = 15.0
-    var timeForCurrentLevel = 15.0
+    var timerCount = 50.0
+    var timeForCurrentLevel = 50.0
     var callTimerAtFirstTime = true
     let defaults = UserDefaults.standard
     var setLastRecordTime = 0.0
     
-    var alphaValue = 1.0
+    var alphaValue = 4.0
     
     //MARK: - Internal
     internal var labelShowTimeProtocol: UILabel!
@@ -60,6 +63,7 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
         buttonCollectionProtocol = buttonCollection
         labelShowTimeProtocol = labelShowTime
         mainLevelLogic.passNumberInButtons(arrayOfButton: buttonCollection)
+        whichNumberTapNextOutlet.text = "[\(pressButtonValue + 1)] \(pressButtonValue + 2) \(pressButtonValue + 3)"
     }
     
     //MARK: - Funcs
@@ -81,14 +85,21 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
         level2_TheMoreTimeGoneTheLessAlphaIs(alpha: alphaValue)
     }
     
+    @IBAction func backButtonAction(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func restartButtonAction(_ sender: Any) {
-        timer.invalidate()
-        timerForLevel2.invalidate()
-        
+        if timer != nil {
+            timer.invalidate()
+        }
+        if timerForLevel2 != nil {
+            timerForLevel2.invalidate()
+        }
+
         pressButtonValue = 0
         timerCount = timeForCurrentLevel
-        level2_TheMoreTimeGoneTheLessAlphaIs(alpha: 1.0)    //TODO: check if it implemented
+        level2_TheMoreTimeGoneTheLessAlphaIs(alpha: 4.0)    
         labelShowTime.text = ""
         
         makeButtonEnableAgain()
@@ -96,6 +107,7 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
         mainLevelLogic.passNumberInButtons(arrayOfButton: buttonCollection)
         
         callTimerAtFirstTime = true
+        whichNumberTapNextOutlet.text = "[\(pressButtonValue + 1)] \(pressButtonValue + 2) \(pressButtonValue + 3)"
     }
     
     //MARK: - Actions
@@ -108,11 +120,40 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
             callTimerAtFirstTime = false
         }
         if sender.titleLabel?.text == String(pressButtonValue + 1) {
-            pressButtonValue += 1
-            sender.isEnabled = false
+//            numberOfButtonsWerePressed = pressButtonValue
+//            print(numberOfButtonsWerePressed)
+//            arrayOfNumbers.sort()
+//            arrayOfNumbers.remove(at: 0)
+//            print("array2 - \(arrayOfNumbers)")
+//            arrayOfTags.append(sender.tag)
+            print(alphaValue)
+            switch pressButtonValue + 2{
+            case 2:
+                whichNumberTapNextOutlet.text = "\(pressButtonValue + 1) [\(pressButtonValue + 2)] \(pressButtonValue + 3) \(pressButtonValue + 4)"
+            case 3:
+                whichNumberTapNextOutlet.text = "\(pressButtonValue) \(pressButtonValue + 1) [\(pressButtonValue + 2)] \(pressButtonValue + 3) \(pressButtonValue + 4)"
+            case 4...22:
+                whichNumberTapNextOutlet.text = "... \(pressButtonValue) \(pressButtonValue + 1) [\(pressButtonValue + 2)] \(pressButtonValue + 3) \(pressButtonValue + 4) ..."
+            case 23:
+                whichNumberTapNextOutlet.text = "... \(pressButtonValue) \(pressButtonValue + 1) [\(pressButtonValue + 2)] \(pressButtonValue + 3) \(pressButtonValue + 4)"
+            case 24:
+                whichNumberTapNextOutlet.text = "... \(pressButtonValue) \(pressButtonValue + 1) [\(pressButtonValue + 2)] \(pressButtonValue + 3)"
+            case 25:
+                whichNumberTapNextOutlet.text = "... \(pressButtonValue) \(pressButtonValue + 1) [\(pressButtonValue + 2)]"
+            default:
+                break
+            }
             
-            mainLevelLogic.passNumberInButtons(arrayOfButton: buttonCollection)
-        
+            mainLevelLogic.arrayOfNumbers.shuffle()
+            
+            let array = mainLevelLogic.arrayOfNumbers
+            for i in 0...array.count - 1 {
+                buttonCollection[i].setTitle(String(array[i]), for: .normal)
+            }
+            
+            pressButtonValue += 1
+            //sender.isEnabled = false
+            
             if pressButtonValue == 25 {
                 alertControllerInfoProtocol(titleP:"Congratulate!", messageP:"You made this!")
                 
@@ -128,34 +169,6 @@ class Level3VC: UIViewController, MainProtocol, SecondLevelProtocol {
         } else {
             alertControllerInfoProtocol(titleP:"Wrong!", messageP:"You tap a wrong number!")
             restartButtonAction(Any.self)
-        }
-    }
-    
-    
-    func fillSetWithValues() {
-        repeat{
-            let random = arc4random_uniform(26)
-            if Int(random) != 0 {
-                setOfNumbers.insert(Int(random))
-            }
-        } while setOfNumbers.count != 25
-        
-        makeNumbersInArrayInRandomPossition()
-    }
-    
-    func makeNumbersInArrayInRandomPossition() {
-        arrayOfNumbers.removeAll()
-        for i in setOfNumbers {
-            arrayOfNumbers.append(i)
-        }
-        
-        arrayOfNumbers.shuffle()
-    }
-    
-    func passNumberInButtons(arrayOfButton: [UIButton]) {
-        let array = arrayOfNumbers
-        for i in 0...24 {
-            arrayOfButton[i].setTitle(String(array[i]), for: .normal)
         }
     }
 }
